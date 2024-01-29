@@ -1,0 +1,41 @@
+import torchvision.transforms as transforms
+
+
+def get_data_config():
+    return {
+        'root': "/data/public/renhaoye/mgs/",
+        # 'save_dir': "/data/public/renhaoye/mgs/ye_2023_uda_g/",
+        'save_dir': "/data/public/renhaoye/mgs/ye_2024_uda_c/",
+        # 'save_dir': "/data/public/renhaoye/mgs/sdss_cdcl_3/",
+        'train_file': "/data/public/renhaoye/mgs/data/train_uda_raw.txt",
+        # 'train_file': "/data1/public/GalaxyMNIST/gz1/sdss_south_train.txt",
+        # 'train_file': "/data/public/renhaoye/uda.txt",
+        'valid_file': "/data/public/renhaoye/mgs/data/valid_uda_raw.txt",
+        # 'valid_file': "/data1/public/GalaxyMNIST/gz1/sdss_south_test.txt",
+        # 'train_file': "/data/public/renhaoye/morphics/dataset/train_raw.txt",
+        # 'valid_file': "/data/public/renhaoye/morphics/dataset/valid_raw.txt",
+        # 'epochs': 20,
+        'epochs': 200,
+        # 'epochs': 1000,
+        'batch_size': 512,
+        'patience': 5,
+        'dropout_rate': 0.3,
+        'WORKERS': 64,
+        # 'WORKERS': 8,
+        'transfer': transforms.Compose([
+            transforms.RandomRotation(degrees=(0, 180)),
+            transforms.RandomHorizontalFlip(p=0.5),
+            transforms.ToTensor(),
+        ]),
+        'lr': 1e-6,
+        # 'lr': 1e-5,
+        'betas': (0.9, 0.999),
+        'phase': "training",
+        'sample': 1,
+        'dist_threshold': 0.,
+        # 'model': "ye_2023_s_raw/model_48.pt",
+        'model': "ye_2023_sigmoid_raw/model_54.pt",
+        'tau': 0.05,
+        'tmax': 365*2,
+        'optimizer': "AdamW",
+    }
